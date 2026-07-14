@@ -65,7 +65,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -50px;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
@@ -75,8 +75,73 @@ body::before {
     black 40%,
     transparent 90%
   );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    black 40%,
+    transparent 90%
+  );
   pointer-events: none;
   z-index: 0;
+  animation:
+    gridDrift 42s linear infinite,
+    gridBreathe 6s ease-in-out infinite;
+}
+
+/* fixed, slow-drifting glow orbs injected by script.js — the "live" backdrop */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.32;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bg-orb-1 {
+  width: 40vw;
+  height: 40vw;
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle, var(--signal), transparent 70%);
+  animation: orbPulse 6s ease-in-out infinite;
+}
+
+.bg-orb-2 {
+  width: 34vw;
+  height: 34vw;
+  top: 45%;
+  right: -12%;
+  background: radial-gradient(circle, var(--pulse), transparent 70%);
+  animation: orbPulse 7.5s ease-in-out infinite 1.2s;
+}
+
+.bg-orb-3 {
+  width: 28vw;
+  height: 28vw;
+  bottom: -10%;
+  left: 28%;
+  background: radial-gradient(circle, var(--amber), transparent 70%);
+  animation: orbPulse 5.4s ease-in-out infinite 2.4s;
+}
+
+@keyframes orbPulse {
+  0%,
+  100% {
+    opacity: 0.24;
+  }
+
+  50% {
+    opacity: 0.42;
+  }
 }
 
 a {
@@ -1058,6 +1123,31 @@ footer {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes gridDrift {
+  from {
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      84px 84px,
+      84px 84px;
+  }
+}
+
+@keyframes gridBreathe {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
 

@@ -33,6 +33,75 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---------------- Dynamic background: drifting glow orbs ---------------- */
+  const orbContainer = document.createElement("div");
+  orbContainer.className = "bg-orbs";
+  orbContainer.setAttribute("aria-hidden", "true");
+  orbContainer.innerHTML = `
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    `;
+  document.body.prepend(orbContainer);
+  const orbs = Array.from(orbContainer.querySelectorAll(".bg-orb"));
+
+  // per-orb motion profile: independent drift speed/radius + parallax depth
+  const orbProfiles = [
+    {
+      radiusX: 9,
+      radiusY: 7,
+      speed: 0.00028,
+      depth: 34,
+      scrollDepth: 0.05,
+      phase: 0,
+    },
+    {
+      radiusX: 7,
+      radiusY: 10,
+      speed: -0.00035,
+      depth: 48,
+      scrollDepth: -0.08,
+      phase: 2.1,
+    },
+    {
+      radiusX: 10,
+      radiusY: 6,
+      speed: 0.00023,
+      depth: 24,
+      scrollDepth: 0.11,
+      phase: 4.2,
+    },
+  ];
+
+  let mouseX = 0,
+    mouseY = 0; // normalized -1..1
+
+  if (!reduceMotion) {
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+      },
+      { passive: true },
+    );
+
+    const animateOrbs = (t) => {
+      const scrollY = window.scrollY;
+      orbs.forEach((orb, i) => {
+        const p = orbProfiles[i];
+        const driftX = Math.cos(t * p.speed + p.phase) * p.radiusX;
+        const driftY = Math.sin(t * p.speed + p.phase) * p.radiusY;
+        const parallaxX = mouseX * p.depth;
+        const parallaxY = mouseY * p.depth + scrollY * p.scrollDepth;
+        const scale = 1 + Math.sin(t * p.speed * 1.6 + p.phase) * 0.14;
+        orb.style.transform = `translate3d(${(driftX + parallaxX).toFixed(2)}vw, ${(driftY + parallaxY).toFixed(2)}px, 0) scale(${scale.toFixed(3)})`;
+      });
+      requestAnimationFrame(animateOrbs);
+    };
+    requestAnimationFrame(animateOrbs);
+  }
+
   /* ---------------- Hero role rotation (typewriter) ---------------- */
   const roleEl = document.getElementById("role-text");
   if (roleEl && !reduceMotion) {
