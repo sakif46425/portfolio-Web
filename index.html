@@ -38,7 +38,9 @@
 
     <header>
       <nav class="navbar">
-        <div class="logo">Sakif<span>.</span></div>
+        <div class="logo">
+          <a href="#home"><span>Portfolio</span></a>
+        </div>
 
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
@@ -473,35 +475,84 @@
           </div>
         </div>
 
-        <div class="project-card" data-category="ml">
+        <div class="project-card project-card-featured" data-category="ml">
           <div class="project-thumb">
             <img
-              src="./assets/images/projects/rice-leaf.jpg"
-              alt="Rice Leaf Disease Prediction"
+              src="./assets/images/projects/earthquake-magnitude.jpg"
+              alt="Comparative Study of Machine Learning Models for Earthquake Magnitude Prediction"
               onerror="this.remove()"
             />
-            <i class="fas fa-seedling thumb-icon"></i>
+            <i class="fas fa-wave-square thumb-icon"></i>
+            <span class="thumb-badge">Featured · Thesis</span>
           </div>
           <div class="project-body">
-            <h3>Rice Leaf Disease Prediction</h3>
-            <p>
-              Deployed image-based ML system for rice leaf disease detection;
-              91.7% accuracy using ResNet-50.
+            <h3>
+              Comparative Study of Machine Learning Models for Earthquake
+              Magnitude Prediction
+            </h3>
+            <p class="project-meta">
+              <span
+                ><strong>Type:</strong> Thesis / Machine Learning Research
+                Project</span
+              >
+              <span
+                ><strong>Role:</strong> Researcher & Machine Learning
+                Developer</span
+              >
             </p>
+            <p>
+              Developed a comparative machine learning framework for predicting
+              earthquake magnitude from seismic records. The project evaluated
+              six regression models — Linear Regression, Support Vector
+              Regression, K-Nearest Neighbors, Decision Tree, Random Forest, and
+              XGBoost — using MAE, RMSE, and R² evaluation metrics, with data
+              preprocessing, feature standardization, an 80:20 train-test split,
+              multi-model training, performance comparison, feature importance
+              analysis, and magnitude-class visualization.
+            </p>
+
+            <div class="highlight-stat">
+              <i class="fas fa-trophy"></i>
+              <span>
+                <strong>XGBoost</strong> led the field — R²
+                <strong>0.9262</strong>, MAE <strong>0.1574</strong>, RMSE
+                <strong>0.2242</strong>
+              </span>
+            </div>
+
+            <ul class="feature-list">
+              <li>
+                Comparative analysis of six machine learning regression models
+              </li>
+              <li>Automated data preprocessing and feature scaling</li>
+              <li>Model evaluation using MAE, RMSE, and R² Score</li>
+              <li>XGBoost-based feature importance analysis</li>
+              <li>Actual vs. predicted earthquake magnitude visualization</li>
+              <li>Magnitude classification using confusion matrix analysis</li>
+            </ul>
+
+            <p class="project-outcome">
+              <strong>Research Outcome:</strong> the study showed ensemble and
+              boosting-based models — particularly XGBoost — are highly
+              effective for modeling nonlinear relationships in seismic data.
+            </p>
+
             <div class="tech-tags">
-              <span>TensorFlow</span><span>Keras</span><span>CNN</span
-              ><span>Flask</span><span>AWS</span>
+              <span>Python</span><span>Pandas</span><span>NumPy</span
+              ><span>Scikit-learn</span><span>XGBoost</span
+              ><span>Data Preprocessing</span><span>Data Analysis</span
+              ><span>Data Visualization</span>
             </div>
             <div class="project-links">
               <a href="#" class="proj-link" target="_blank" rel="noopener"
                 ><i class="fab fa-github"></i> Code</a
               >
               <a
-                href="#"
+                href="./assets/earthquake_magnitude_prediction_thesis.pdf"
                 class="proj-link proj-link-demo"
                 target="_blank"
                 rel="noopener"
-                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+                ><i class="fas fa-file-lines"></i> Thesis Paper</a
               >
             </div>
           </div>

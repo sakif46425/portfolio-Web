@@ -1106,6 +1106,107 @@ header {
   margin-top: 1.2rem;
 }
 
+/* ---- Featured / thesis project card ---- */
+.project-card-featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 860px) {
+  .project-card-featured {
+    grid-column: span 1;
+  }
+}
+
+.thumb-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: linear-gradient(90deg, var(--signal), var(--pulse));
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 0.9rem !important;
+}
+
+.project-meta strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.highlight-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  background: rgba(var(--signal-rgb), 0.08);
+  border: 1px solid rgba(var(--signal-rgb), 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+}
+
+.highlight-stat i {
+  color: var(--amber);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 1rem;
+  padding-left: 0;
+}
+
+.feature-list li {
+  list-style: none;
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.feature-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 6px rgba(var(--signal-rgb), 0.7);
+}
+
+.project-outcome {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.2rem !important;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--border);
+}
+
+.project-outcome strong {
+  color: var(--signal);
+}
+
 .proj-link {
   display: inline-flex;
   align-items: center;
