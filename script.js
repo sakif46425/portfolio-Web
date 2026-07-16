@@ -33,6 +33,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---------------- Dark / light theme toggle ---------------- */
+  const themeToggle = document.getElementById("themeToggle");
+  const rootEl = document.documentElement;
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isLight = rootEl.getAttribute("data-theme") === "light";
+      if (isLight) {
+        rootEl.removeAttribute("data-theme");
+        try {
+          localStorage.setItem("theme", "dark");
+        } catch (e) {}
+      } else {
+        rootEl.setAttribute("data-theme", "light");
+        try {
+          localStorage.setItem("theme", "light");
+        } catch (e) {}
+      }
+    });
+  }
+
   /* ---------------- Dynamic background: drifting glow orbs ---------------- */
   const orbContainer = document.createElement("div");
   orbContainer.className = "bg-orbs";
@@ -179,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------------- Scroll reveal ---------------- */
   const revealTargets = document.querySelectorAll(
-    ".section-title, .about-content, .skill-category, .project-card, .pub-card, .education-card, .info-card, .contact-info, #contact form",
+    ".section-title, .about-content, .skill-category, .project-card, .pub-card, .education-card, .info-card, .ref-card, .contact-info, #contact form",
   );
 
   revealTargets.forEach((el) => el.classList.add("reveal"));
@@ -195,7 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
               entry.target.classList.contains("project-card") ||
               entry.target.classList.contains("pub-card") ||
               entry.target.classList.contains("education-card") ||
-              entry.target.classList.contains("info-card")
+              entry.target.classList.contains("info-card") ||
+              entry.target.classList.contains("ref-card")
                 ? (i % 6) * 60
                 : 0;
             setTimeout(() => entry.target.classList.add("in-view"), delay);
@@ -211,33 +233,145 @@ document.addEventListener("DOMContentLoaded", () => {
     revealTargets.forEach((el) => el.classList.add("in-view"));
   }
 
-  /* ---------------- Contact form (no backend attached) ---------------- */
-  const form = document.querySelector("#contact form");
+  /* ---------------- Project filters ---------------- */
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-card");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.dataset.filter;
+
+      projectCards.forEach((card) => {
+        const match = filter === "all" || card.dataset.category === filter;
+        card.classList.remove("filter-in");
+        if (match) {
+          card.classList.remove("filter-hide");
+          if (!reduceMotion) {
+            void card.offsetWidth; // restart animation
+            card.classList.add("filter-in");
+          }
+        } else {
+          card.classList.add("filter-hide");
+        }
+      });
+    });
+  });
+
+  /* ---------------- Skill progress bars ---------------- */
+  const skillBars = document.querySelectorAll(".skill-bar");
+  skillBars.forEach((bar) => {
+    bar.style.setProperty("--level", `${bar.dataset.level || 0}%`);
+  });
+
+  if ("IntersectionObserver" in window) {
+    const skillObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            skillObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+
+    skillBars.forEach((bar) => skillObserver.observe(bar));
+  } else {
+    skillBars.forEach((bar) => bar.classList.add("in-view"));
+  }
+
+  /* ---------------- Button ripple ---------------- */
+  document.querySelectorAll(".btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 650);
+    });
+  });
+
+  /* ---------------- Cursor glow + project-card tilt (non-touch only) ---------------- */
+  const isFinePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  ).matches;
+
+  if (!reduceMotion && isFinePointer) {
+    const glow = document.createElement("div");
+    glow.className = "cursor-glow";
+    glow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(glow);
+
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+        glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      },
+      { passive: true },
+    );
+
+    projectCards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-8px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  /* ---------------- Contact form (Formspree) ---------------- */
+  const form = document.getElementById("contactForm");
   if (form) {
     const note = document.createElement("p");
     note.className = "form-note";
     note.setAttribute("role", "status");
     form.appendChild(note);
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const nameInput = form.querySelector('input[type="text"]');
-      const emailInput = form.querySelector('input[type="email"]');
-      const messageInput = form.querySelector("textarea");
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.textContent;
+      const nameInput = form.querySelector('input[name="name"]');
+      const firstName =
+        (nameInput?.value || "").trim().split(" ")[0] || "there";
 
-      if (
-        !nameInput.value.trim() ||
-        !emailInput.value.trim() ||
-        !messageInput.value.trim()
-      ) {
-        note.textContent = "// incomplete signal — fill in every field";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+      note.textContent = "";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (response.ok) {
+          note.textContent = `// signal received — thanks, ${firstName}. I\u2019ll reply soon.`;
+          note.style.color = "var(--signal)";
+          form.reset();
+        } else {
+          throw new Error("Form submission failed");
+        }
+      } catch (err) {
+        note.textContent =
+          "// transmission failed — email me directly at sakifkhan1340@gmail.com";
         note.style.color = "var(--pulse)";
-        return;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
       }
-
-      note.textContent = `// signal received — thanks, ${nameInput.value.trim().split(" ")[0]}. I\u2019ll reply soon.`;
-      note.style.color = "var(--signal)";
-      form.reset();
     });
   }
 

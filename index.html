@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sakif Khan | Portfolio</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo.png" />
+    <link rel="icon" type="image/png" href="./assets/images/logo.png" />
+
+    <!-- Inline theme bootstrap: applies saved theme before CSS paints, no flash -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light")
+            document.documentElement.setAttribute("data-theme", "light");
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
 
@@ -26,7 +38,7 @@
 
     <header>
       <nav class="navbar">
-        <div class="logo">Portfolio<span></span></div>
+        <div class="logo">Sakif<span>.</span></div>
 
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
@@ -43,11 +55,24 @@
 
           <li><a href="#additional">More</a></li>
 
+          <li><a href="#references">References</a></li>
+
           <li><a href="#contact">Contact</a></li>
         </ul>
 
-        <div class="menu-btn">
-          <i class="fas fa-bars"></i>
+        <div class="nav-actions">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle dark / light mode"
+          >
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+          </button>
+
+          <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+          </div>
         </div>
       </nav>
     </header>
@@ -121,10 +146,7 @@
     <!--================ ABOUT =================-->
 
     <section id="about">
-      <h2 class="section-title">
-        <span class="eyebrow"> </span>
-        About Me
-      </h2>
+      <h2 class="section-title">About Me</h2>
 
       <div class="about-content glass">
         <p>
@@ -148,66 +170,255 @@
     <!--================ SKILLS =================-->
 
     <section id="skills">
-      <h2 class="section-title">
-        <span class="eyebrow"></span>
-        Technical Skills
-      </h2>
+      <h2 class="section-title">Technical Skills</h2>
 
       <div class="skills-grid">
         <div class="skill-category glass">
           <h3>Languages</h3>
-          <div class="skill-tags">
-            <span>C</span>
-            <span>C++</span>
-            <span>Python</span>
-            <span>JavaScript</span>
-            <span>Java</span>
-            <span>C#</span>
+          <div class="skill-bars">
+            <div class="skill-bar" data-level="70">
+              <div class="skill-bar-head">
+                <span>C</span><span class="skill-percent">70%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="72">
+              <div class="skill-bar-head">
+                <span>C++</span><span class="skill-percent">72%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="90">
+              <div class="skill-bar-head">
+                <span>Python</span><span class="skill-percent">90%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="85">
+              <div class="skill-bar-head">
+                <span>JavaScript</span><span class="skill-percent">85%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="62">
+              <div class="skill-bar-head">
+                <span>Java</span><span class="skill-percent">62%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="58">
+              <div class="skill-bar-head">
+                <span>C#</span><span class="skill-percent">58%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="skill-category glass">
           <h3>Web</h3>
-          <div class="skill-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>Tailwind CSS</span>
-            <span>React.js</span>
-            <span>React Router</span>
+          <div class="skill-bars">
+            <div class="skill-bar" data-level="92">
+              <div class="skill-bar-head">
+                <span>HTML</span><span class="skill-percent">92%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="88">
+              <div class="skill-bar-head">
+                <span>CSS</span><span class="skill-percent">88%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="80">
+              <div class="skill-bar-head">
+                <span>Tailwind CSS</span><span class="skill-percent">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="82">
+              <div class="skill-bar-head">
+                <span>React.js</span><span class="skill-percent">82%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="76">
+              <div class="skill-bar-head">
+                <span>React Router</span><span class="skill-percent">76%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="skill-category glass">
           <h3>Data / ML</h3>
-          <div class="skill-tags">
-            <span>TensorFlow</span>
-            <span>Keras</span>
-            <span>Scikit-learn</span>
-            <span>Pandas</span>
-            <span>NumPy</span>
-            <span>CNN (ResNet-50, VGG-16)</span>
+          <div class="skill-bars">
+            <div class="skill-bar" data-level="80">
+              <div class="skill-bar-head">
+                <span>TensorFlow</span><span class="skill-percent">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="78">
+              <div class="skill-bar-head">
+                <span>Keras</span><span class="skill-percent">78%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="86">
+              <div class="skill-bar-head">
+                <span>Scikit-learn</span><span class="skill-percent">86%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="83">
+              <div class="skill-bar-head">
+                <span>Pandas</span><span class="skill-percent">83%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="80">
+              <div class="skill-bar-head">
+                <span>NumPy</span><span class="skill-percent">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="74">
+              <div class="skill-bar-head">
+                <span>CNN (ResNet-50, VGG-16)</span
+                ><span class="skill-percent">74%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="skill-category glass">
           <h3>DB & CS Fundamentals</h3>
-          <div class="skill-tags">
-            <span>SQL</span>
-            <span>OOP</span>
-            <span>Data Structures & Algorithms</span>
-            <span>Basic Networking</span>
+          <div class="skill-bars">
+            <div class="skill-bar" data-level="78">
+              <div class="skill-bar-head">
+                <span>SQL</span><span class="skill-percent">78%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="85">
+              <div class="skill-bar-head">
+                <span>OOP</span><span class="skill-percent">85%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="81">
+              <div class="skill-bar-head">
+                <span>Data Structures & Algorithms</span
+                ><span class="skill-percent">81%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="64">
+              <div class="skill-bar-head">
+                <span>Basic Networking</span
+                ><span class="skill-percent">64%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="skill-category glass">
           <h3>Tools</h3>
-          <div class="skill-tags">
-            <span>Git</span>
-            <span>GitHub</span>
-            <span>VS Code</span>
-            <span>Flask</span>
-            <span>AWS</span>
-            <span>Figma</span>
+          <div class="skill-bars">
+            <div class="skill-bar" data-level="86">
+              <div class="skill-bar-head">
+                <span>Git</span><span class="skill-percent">86%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="86">
+              <div class="skill-bar-head">
+                <span>GitHub</span><span class="skill-percent">86%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="90">
+              <div class="skill-bar-head">
+                <span>VS Code</span><span class="skill-percent">90%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="75">
+              <div class="skill-bar-head">
+                <span>Flask</span><span class="skill-percent">75%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="60">
+              <div class="skill-bar-head">
+                <span>AWS</span><span class="skill-percent">60%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar" data-level="55">
+              <div class="skill-bar-head">
+                <span>Figma</span><span class="skill-percent">55%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -216,116 +427,299 @@
     <!--================ PROJECTS =================-->
 
     <section id="projects">
-      <h2 class="section-title">
-        <span class="eyebrow"></span>
-        Featured Projects
-      </h2>
+      <h2 class="section-title">Featured Projects</h2>
+
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ml">Machine Learning</button>
+        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="systems">
+          Systems & Desktop
+        </button>
+      </div>
 
       <div class="projects">
-        <div class="project-card">
-          <h3>Dengue Patient Risk Stratification</h3>
-          <p>
-            Hybrid ML model classifying dengue patients by risk level; 98.53%
-            accuracy with clinical safety rules.
-          </p>
-          <div class="tech-tags">
-            <span>Python</span><span>Scikit-learn</span><span>K-Means</span
-            ><span>Random Forest</span>
+        <div class="project-card" data-category="ml">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/dengue-risk.jpg"
+              alt="Dengue Patient Risk Stratification"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-syringe thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Dengue Patient Risk Stratification</h3>
+            <p>
+              Hybrid ML model classifying dengue patients by risk level; 98.53%
+              accuracy with clinical safety rules.
+            </p>
+            <div class="tech-tags">
+              <span>Python</span><span>Scikit-learn</span><span>K-Means</span
+              ><span>Random Forest</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+              <a
+                href="#"
+                class="proj-link proj-link-demo"
+                target="_blank"
+                rel="noopener"
+                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Rice Leaf Disease Prediction</h3>
-          <p>
-            Deployed image-based ML system for rice leaf disease detection;
-            91.7% accuracy using ResNet-50.
-          </p>
-          <div class="tech-tags">
-            <span>TensorFlow</span><span>Keras</span><span>CNN</span
-            ><span>Flask</span><span>AWS</span>
+        <div class="project-card" data-category="ml">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/rice-leaf.jpg"
+              alt="Rice Leaf Disease Prediction"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-seedling thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Rice Leaf Disease Prediction</h3>
+            <p>
+              Deployed image-based ML system for rice leaf disease detection;
+              91.7% accuracy using ResNet-50.
+            </p>
+            <div class="tech-tags">
+              <span>TensorFlow</span><span>Keras</span><span>CNN</span
+              ><span>Flask</span><span>AWS</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+              <a
+                href="#"
+                class="proj-link proj-link-demo"
+                target="_blank"
+                rel="noopener"
+                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Hotel & Restaurant Review Clustering</h3>
-          <p>
-            Sentiment-based clustering of large review datasets to surface
-            recurring feedback themes.
-          </p>
-          <div class="tech-tags">
-            <span>R</span><span>NLP</span><span>TF-IDF</span
-            ><span>Clustering</span>
+        <div class="project-card" data-category="ml">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/review-clustering.jpg"
+              alt="Hotel & Restaurant Review Clustering"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-utensils thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Hotel & Restaurant Review Clustering</h3>
+            <p>
+              Sentiment-based clustering of large review datasets to surface
+              recurring feedback themes.
+            </p>
+            <div class="tech-tags">
+              <span>R</span><span>NLP</span><span>TF-IDF</span
+              ><span>Clustering</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Hero Apps</h3>
-          <p>
-            Responsive React.js App Store with live search, sorting, charts, and
-            localStorage install/uninstall.
-          </p>
-          <div class="tech-tags">
-            <span>React.js</span><span>React Router</span
-            ><span>JavaScript ES6+</span><span>Tailwind</span>
+        <div class="project-card" data-category="web">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/hero-apps.jpg"
+              alt="Hero Apps"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-mobile-screen-button thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Hero Apps</h3>
+            <p>
+              Responsive React.js App Store with live search, sorting, charts,
+              and localStorage install/uninstall.
+            </p>
+            <div class="tech-tags">
+              <span>React.js</span><span>React Router</span
+              ><span>JavaScript ES6+</span><span>Tailwind</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+              <a
+                href="#"
+                class="proj-link proj-link-demo"
+                target="_blank"
+                rel="noopener"
+                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Customer Support Ticket System</h3>
-          <p>
-            Responsive dashboard with real-time ticket tracking, notifications,
-            and full lifecycle management.
-          </p>
-          <div class="tech-tags">
-            <span>React.js</span><span>JavaScript ES6</span
-            ><span>React-Toastify</span><span>JSON</span>
+        <div class="project-card" data-category="web">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/ticket-system.jpg"
+              alt="Customer Support Ticket System"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-headset thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Customer Support Ticket System</h3>
+            <p>
+              Responsive dashboard with real-time ticket tracking,
+              notifications, and full lifecycle management.
+            </p>
+            <div class="tech-tags">
+              <span>React.js</span><span>JavaScript ES6</span
+              ><span>React-Toastify</span><span>JSON</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+              <a
+                href="#"
+                class="proj-link proj-link-demo"
+                target="_blank"
+                rel="noopener"
+                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Plant Green Earth</h3>
-          <p>
-            Responsive campaign web app with API-based data loading, filtering,
-            modals, and a cart system.
-          </p>
-          <div class="tech-tags">
-            <span>HTML</span><span>Tailwind / DaisyUI</span
-            ><span>JavaScript ES6</span>
+        <div class="project-card" data-category="web">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/plant-green-earth.jpg"
+              alt="Plant Green Earth"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-earth-americas thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Plant Green Earth</h3>
+            <p>
+              Responsive campaign web app with API-based data loading,
+              filtering, modals, and a cart system.
+            </p>
+            <div class="tech-tags">
+              <span>HTML</span><span>Tailwind / DaisyUI</span
+              ><span>JavaScript ES6</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+              <a
+                href="#"
+                class="proj-link proj-link-demo"
+                target="_blank"
+                rel="noopener"
+                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Bangladesh Emergency Hotline</h3>
-          <p>
-            Responsive emergency hotline directory with interactive cards and
-            real-time UI updates.
-          </p>
-          <div class="tech-tags">
-            <span>HTML</span><span>Tailwind / DaisyUI</span
-            ><span>Vanilla JS</span>
+        <div class="project-card" data-category="web">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/emergency-hotline.jpg"
+              alt="Bangladesh Emergency Hotline"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-phone-volume thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Bangladesh Emergency Hotline</h3>
+            <p>
+              Responsive emergency hotline directory with interactive cards and
+              real-time UI updates.
+            </p>
+            <div class="tech-tags">
+              <span>HTML</span><span>Tailwind / DaisyUI</span
+              ><span>Vanilla JS</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+              <a
+                href="#"
+                class="proj-link proj-link-demo"
+                target="_blank"
+                rel="noopener"
+                ><i class="fas fa-arrow-up-right-from-square"></i> Live Demo</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Rainy Day (City Simulation)</h3>
-          <p>
-            Interactive OpenGL city simulation with dynamic weather, traffic
-            control, and sound effects.
-          </p>
-          <div class="tech-tags">
-            <span>C/C++</span><span>OpenGL</span><span>GLUT</span
-            ><span>WinMM</span>
+        <div class="project-card" data-category="systems">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/rainy-day.jpg"
+              alt="Rainy Day City Simulation"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-cloud-rain thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Rainy Day (City Simulation)</h3>
+            <p>
+              Interactive OpenGL city simulation with dynamic weather, traffic
+              control, and sound effects.
+            </p>
+            <div class="tech-tags">
+              <span>C/C++</span><span>OpenGL</span><span>GLUT</span
+              ><span>WinMM</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+            </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <h3>Rock-Paper-Scissors Game</h3>
-          <p>
-            Interactive desktop game with event-driven logic, real-time score
-            tracking, and dynamic UI.
-          </p>
-          <div class="tech-tags">
-            <span>C#</span><span>.NET Framework</span><span>WinForms</span>
+        <div class="project-card" data-category="systems">
+          <div class="project-thumb">
+            <img
+              src="./assets/images/projects/rock-paper-scissors.jpg"
+              alt="Rock-Paper-Scissors Game"
+              onerror="this.remove()"
+            />
+            <i class="fas fa-hand-scissors thumb-icon"></i>
+          </div>
+          <div class="project-body">
+            <h3>Rock-Paper-Scissors Game</h3>
+            <p>
+              Interactive desktop game with event-driven logic, real-time score
+              tracking, and dynamic UI.
+            </p>
+            <div class="tech-tags">
+              <span>C#</span><span>.NET Framework</span><span>WinForms</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="proj-link" target="_blank" rel="noopener"
+                ><i class="fab fa-github"></i> Code</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -334,10 +728,7 @@
     <!--================ PUBLICATIONS =================-->
 
     <section id="publications">
-      <h2 class="section-title">
-        <span class="eyebrow"></span>
-        Publications & Certifications
-      </h2>
+      <h2 class="section-title">Publications & Certifications</h2>
 
       <div class="pub-grid">
         <div class="pub-card glass">
@@ -365,10 +756,7 @@
     <!--================ EDUCATION =================-->
 
     <section id="education">
-      <h2 class="section-title">
-        <span class="eyebrow"></span>
-        Education
-      </h2>
+      <h2 class="section-title">Education</h2>
 
       <div class="education-list">
         <div class="education-card">
@@ -401,10 +789,7 @@
     <!--================ ADDITIONAL INFO =================-->
 
     <section id="additional">
-      <h2 class="section-title">
-        <span class="eyebrow"></span>
-        Beyond the Code
-      </h2>
+      <h2 class="section-title">Beyond the Code</h2>
 
       <div class="info-grid">
         <div class="info-card glass">
@@ -433,11 +818,47 @@
             <span>Time Management</span>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="info-card glass">
-          <h3><i class="fas fa-user-tie"></i> Reference</h3>
-          <p>Md. Mahmudur Rahman</p>
-          <p>Lecturer, Department of Computer Science, AIUB</p>
+    <!--================ REFERENCES =================-->
+
+    <section id="references">
+      <h2 class="section-title">References</h2>
+
+      <div class="ref-grid">
+        <div class="ref-card glass">
+          <div class="ref-avatar"><i class="fas fa-user-tie"></i></div>
+          <h3>Md. Mahmudur Rahman</h3>
+          <span class="ref-role">Lecturer, Department of Computer Science</span>
+          <span class="ref-org"
+            >American International University-Bangladesh</span
+          >
+        </div>
+
+        <div class="ref-card glass">
+          <div class="ref-avatar"><i class="fas fa-user-tie"></i></div>
+          <h3>Ashief Hasan Khan</h3>
+          <span class="ref-role">Director (Operation)</span>
+          <span class="ref-org">Wendler Interlining Bangladesh Limited</span>
+          <ul class="ref-contact">
+            <li>
+              <i class="fas fa-location-dot"></i>
+              <span>House 27, Road 44, Gulshan-2, Dhaka-1212, Bangladesh</span>
+            </li>
+            <li>
+              <a href="tel:+8801711477245">
+                <i class="fas fa-phone"></i>
+                <span>+88 01711-477245</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:ashief.khan@wendlerinside.com">
+                <i class="fas fa-envelope"></i>
+                <span>ashief.khan@wendlerinside.com</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -445,10 +866,7 @@
     <!--================ CONTACT =================-->
 
     <section id="contact">
-      <h2 class="section-title">
-        <span class="eyebrow"></span>
-        Contact Me
-      </h2>
+      <h2 class="section-title">Contact Me</h2>
 
       <div class="contact-wrap">
         <div class="contact-info glass">
@@ -498,14 +916,31 @@
           </ul>
         </div>
 
-        <form>
-          <input type="text" placeholder="Your Name" />
+        <form
+          id="contactForm"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+        >
+          <input type="text" name="name" placeholder="Your Name" required />
 
-          <input type="email" placeholder="Email" />
+          <input type="email" name="email" placeholder="Email" required />
 
-          <textarea rows="6" placeholder="Your Message"></textarea>
+          <textarea
+            name="message"
+            rows="6"
+            placeholder="Your Message"
+            required
+          ></textarea>
 
-          <button class="btn">Send Message</button>
+          <input
+            type="text"
+            name="_gotcha"
+            style="display: none"
+            tabindex="-1"
+            autocomplete="off"
+          />
+
+          <button type="submit" class="btn">Send Message</button>
         </form>
       </div>
     </section>
